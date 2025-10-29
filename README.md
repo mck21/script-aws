@@ -1,2 +1,0 @@
-# script-aws
-# script-aws
