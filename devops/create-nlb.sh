@@ -11,7 +11,7 @@ LB_PORT=80
 REGION="us-east-1" 
 VPC_ID="vpc-04bd82e2dea9abf35" # ID de VPC fijo
 SUBNET_LIST="subnet-056cadb032106905e subnet-0f1791c1ad8fd8463" # Subnets fijas
-TARGET_IDS_FORMATTED="Id=i-0c226bb014eedacc5 Id=i-07464f4327b23c2d4" # IDs de Instancia fijas
+TARGET_IDS_FORMATTED="git  # IDs de Instancia fijas
 
 echo "Iniciando la configuración de Network Load Balancer (NLB) con parámetros fijos..."
 
