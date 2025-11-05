@@ -18,6 +18,7 @@ aws ec2 modify-vpc-attribute \
 SUB_ID=$(aws ec2 create-subnet \
   --vpc-id "$VPC_ID" \
   --cidr-block 192.168.0.0/28 \
+  --availability-zone us-east-1a \
   --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=MiSubred1}]' \
   --query 'Subnet.SubnetId' \
   --output text)
@@ -26,23 +27,25 @@ echo "Subred creada con ID: $SUB_ID"
 
 aws ec2 modify-subnet-attribute --subnet-id $SUB_ID --map-public-ip-on-launch
 
-# Crear Security Group
+# Crear Security Group - CORREGIDO
 SG_ID=$(aws ec2 create-security-group \
   --vpc-id $VPC_ID \
   --group-name gs-mck \
   --description "My security group for port 22" \
+  --query 'GroupId' \
   --output text)
 
 echo "Security Group creado con ID: $SG_ID"
 
-# Autorizar el puerto 22 (ssh) para ese SG // esto no le gusta
+# Autorizar puertos 22 y 80
 aws ec2 authorize-security-group-ingress \
     --group-id $SG_ID \
-    --protocol tcp \
-    --port 22 \
-    --cidr 0.0.0.0/0
+    --ip-permissions \
+        IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges='[{CidrIp=0.0.0.0/0}]' \
+#        IpProtocol=tcp,FromPort=80,ToPort=80,IpRanges='[{CidrIp=0.0.0.0/0}]' \
+    > /dev/null
 
-# Crear EC2 (ejemplo 1)
+# Crear EC2
 EC2_ID=$(aws ec2 run-instances \
     --image-id ami-0360c520857e3138f \
     --instance-type t3.micro \
@@ -50,7 +53,8 @@ EC2_ID=$(aws ec2 run-instances \
     --subnet-id $SUB_ID \
     --associate-public-ip-address \
     --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=miEc2}]' \
-    --query Instance.InstanceId --output text)
+    --query 'Instances[0].InstanceId' \
+    --output text)
 
 sleep 15
 
