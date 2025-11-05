@@ -3,8 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/AWS-Cloud-orange?logo=amazon-aws&logoColor=white"/>
-  <img src="https://img.shields.io/badge/EC2-Compute-blue?logo=amazon-ec2&logoColor=white"/>
+  <img src="https://img.shields.io/badge/EC2-Compute-orange?logo=amazon-ec2&logoColor=white"/>
   <img src="https://img.shields.io/badge/RDS-Database-527FFF?logo=amazon-rds&logoColor=white"/>
   <img src="https://img.shields.io/badge/VPC-Network-232F3E?logo=amazon-aws&logoColor=white"/>
   <img src="https://img.shields.io/badge/ELB-Load%20Balancing-FF9900?logo=amazon-aws&logoColor=white"/>
