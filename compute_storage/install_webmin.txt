@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Actualizar el sistema
+apt update
+apt upgrade -y
+
+# Instalar dependencias
+apt install software-properties-common apt-transport-https wget gnupg -y
+
+# Descargar e instalar Webmin directamente desde el paquete .deb
+wget https://prdownloads.sourceforge.net/webadmin/webmin_2.111_all.deb
+
+# Instalar Webmin y sus dependencias
+apt install -y ./webmin_2.111_all.deb
+
+# Si hay dependencias faltantes, forzar instalación
+apt --fix-broken install -y
+
+# Establecer contraseña para root
+echo "root:Webmin123!" | chpasswd
+
+# Limpiar
+rm webmin_2.111_all.deb
