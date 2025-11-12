@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MCK App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login-styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-section">
+            <h1 class="login-title">Acceso</h1>
+            <p class="login-subtitle">Inicia sesión en tu cuenta</p>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input" 
+                        placeholder="tu@email.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input" 
+                        placeholder="••••••••"
+                        required
+                    >
+                </div>
+
+                <div class="form-group checkbox">
+                    <input 
+                        type="checkbox" 
+                        id="remember" 
+                        name="remember"
+                    >
+                    <label for="remember" class="checkbox-label">Recuérdame</label>
+                </div>
+
+                <button type="submit" class="btn-primary btn-login">Iniciar Sesión</button>
+            </form>
+
+            <div class="login-footer">
+                <p class="forgot-password">
+                    <a href="#" class="link">¿Olvidaste tu contraseña?</a>
+                </p>
+                <p class="signup-link">
+                    ¿No tienes cuenta? <a href="#" class="link">Regístrate aquí</a>
+                </p>
+            </div>
+
+            <button id="backBtn" class="btn-back">← Volver a Inicio</button>
+        </div>
+
+        <div class="info">
+            <p>Versión: 1.0.1</p>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
   "name": "mck-app",
-  "version": "1.0.0",
-  "description": "Versión Blue",
+  "version": "1.0.1",
+  "description": "Versión green",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
