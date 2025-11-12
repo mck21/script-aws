@@ -61,3 +61,36 @@ EC2_ID=$(aws ec2 run-instances \
 sleep 15
 
 echo "EC2 creada con ID: $EC2_ID"
+
+# Crear IGW
+IGW_ID=$(aws ec2 create-internet-gateway \
+  --region us-east-1 \
+  --query 'InternetGateway.InternetGatewayId' \
+  --output text)
+
+# Adjuntar IGW a la VPC
+echo "Adjuntando Internet Gateway a la VPC..."
+aws ec2 attach-internet-gateway --internet-gateway-id $IGW_ID --vpc-id $VPC_ID --region us-east-1
+echo "Internet Gateway adjuntado a la VPC $VPC_ID"
+
+# Crear tabla de enrutamiento
+RTB_ID=$(aws ec2 create-route-table \
+  --vpc-id $VPC_ID\
+  --region us-east-1 \
+  --query 'RouteTable.RouteTableId' \
+  --output text)
+
+# Agregar ruta a Internet
+echo "Agregando ruta 0.0.0.0/0 hacia el IGW..."
+aws ec2 create-route --route-table-id $RTB_ID --destination-cidr-block 0.0.0.0/0 --gateway-id $IGW_ID --region us-east-1
+echo "Ruta agregada correctamente."
+
+# Asociar tabla de enrutamiento a la subred
+echo "Asociando la tabla de enrutamiento a la subred..."
+aws ec2 associate-route-table --subnet-id $SUB_ID --route-table-id $RTB_ID --region us-east-1
+echo "Tabla de enrutamiento asociada a la subred $SUB_ID"
+
+echo "Detalles:"
+echo " - Internet Gateway: $IGW_ID"
+echo " - Route Table: $RTB_ID"
+
